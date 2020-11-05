@@ -16,6 +16,7 @@ export default new Vuex.Store({
     entities: [],
     inFocus: undefined,
     showAddModal: false,
+    isDeleteButtonsActive: false,
   },
   mutations: {
     updateEntities(store, payload){
@@ -37,6 +38,14 @@ export default new Vuex.Store({
     },
     addSources(store, payload) {
       store.rssSources = [...new Set(store.rssSources.concat(payload))];
+    },
+    toggleDeletion(store) {
+      store.isDeleteButtonsActive = !store.isDeleteButtonsActive;
+    },
+    deleteEntity(store, payload) {
+      const source = store.entities.filter(x => x.title===payload)[0].feedUrl;
+      store.rssSources = store.rssSources.filter(x => x!==source);
+      store.entities = store.entities.filter(x => x.feedUrl!==source);
     }
   },
   actions: {

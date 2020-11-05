@@ -28,7 +28,7 @@ export default {
     }
     this.$store.dispatch('loadRss');
     this.$store.subscribe((mutation, state) => {
-      if(mutation.type==='addSource'||mutation.type==='addSources'){
+      if(mutation.type==='addSource'||mutation.type==='addSources'||mutation.type==='deleteEntity'){
         localStorage.setItem('rss-sources' ,JSON.stringify(state.rssSources));
       }
     })
